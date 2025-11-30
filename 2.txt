@@ -1,0 +1,22 @@
+-- 1. Listar todos os livros emprestados no momento, mostrando nome do usuário e título do livro (USO DE JOIN e WHERE)
+SELECT 
+    u.nome AS Nome_Usuario, 
+    l.titulo AS Livro_Emprestado, 
+    e.data_prevista_devolucao
+FROM emprestimos e
+JOIN usuarios u ON e.id_usuario = u.id_usuario
+JOIN livros l ON e.id_livro = l.id_livro
+WHERE e.status_emprestimo = 'ATIVO';
+
+-- 2. Listar os livros com pouco estoque (menos de 3 unidades),(USO DE WHERE e ORDER BY)
+SELECT titulo, quantidade_estoque 
+FROM livros 
+WHERE quantidade_estoque < 3 
+ORDER BY titulo ASC;
+
+-- 3. Consultar histórico de empréstimos do usuário
+SELECT l.titulo, e.data_emprestimo, e.status_emprestimo
+FROM emprestimos e
+JOIN usuarios u ON e.id_usuario = u.id_usuario
+JOIN livros l ON e.id_livro = l.id_livro
+WHERE u.nome LIKE '%Daniel%';

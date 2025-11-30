@@ -1,0 +1,32 @@
+-- --- COMANDOS DE UPDATE ---
+
+-- 1. Simular a DEVOLUÇÃO de um livro
+-- Atualiza o status para DEVOLVIDO e coloca a data de hoje na devolução real
+UPDATE emprestimos 
+SET status_emprestimo = 'DEVOLVIDO', data_real_devolucao = CURRENT_DATE 
+WHERE id_emprestimo = 2; -- Supondo que seja a devolução da Geovana
+
+-- 2. Atualizar o endereço de um usuário que mudou de casa
+UPDATE usuarios 
+SET endereco = 'Rua Nova, 100 - Centro' 
+WHERE id_usuario = 1;
+
+-- 3. Corrigir a quantidade de estoque de um livro (chegaram mais exemplares)
+UPDATE livros 
+SET quantidade_estoque = 10 
+WHERE titulo = 'Dom Casmurro';
+
+
+-- --- COMANDOS DE DELETE ---
+
+-- 1. Remover um livro que foi perdido ou destruído e não existe mais no acervo
+DELETE FROM livros 
+WHERE isbn = '978-8576082675'; -- Deletando o Clean Code
+
+-- 2. Remover um usuário que pediu para sair do sistema (Somente se não tiver empréstimos ativos!)
+DELETE FROM usuarios 
+WHERE id_usuario = 3; -- Deletando Carlos Eduardo
+
+-- 3. Cancelar um registro de empréstimo feito por engano (Ex: bibliotecário digitou errado)
+DELETE FROM emprestimos 
+WHERE id_emprestimo = 5; -- Supondo um ID que foi criado errado
